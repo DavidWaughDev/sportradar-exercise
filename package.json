@@ -1,0 +1,27 @@
+{
+  "name": "sportradar-exercise",
+  "version": "1.0.0",
+  "description": "The following repository addresses the exercise provided by Sportradar to a library-level API for managing a sporting tournament scoreboard. Specifically, a caller should be able to create, update the score of, and delete individual games from the scoreboard, as well as get a list of games ordered by total score followed by creation datetime.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidWaughDev/sportradar-exercise.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidWaughDev/sportradar-exercise/issues"
+  },
+  "homepage": "https://github.com/DavidWaughDev/sportradar-exercise#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.14"
+  }
+}
