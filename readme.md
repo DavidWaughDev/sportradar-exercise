@@ -18,20 +18,24 @@ npm t
 
 with test results:
 ```
-  scoreboard service
-    createGame
-      ✕ should create a valid game
-    updateGame
-      ✕ should update an existing game
-    removeGame
-      ✕ should remove a created game
-    getScoreboard
-      ✓ should get an empty scoreboard
-
+scoreboard service
+  createGame
+    ✕ should create a valid game (5 ms)
+    ✕ should fail if homeTeam or awayTeam are empty strings (1 ms)
+    ✕ should fail if homeTeam or awayTeam are the same
+  updateGame
+    ✕ should update an existing game (1 ms)
+    ✕ should fail when updating a non-existent game
+  removeGame
+    ✕ should remove a game (1 ms)
+    ✕ should fail when removing a non-existent game (1 ms)
+  getScoreboard
+    ✓ should get an empty scoreboard
+    ✕ should get a scoreboard ordered first by total score, then by reversed creation order
 ```
 
 ## Assumptions
 
-- As the only scoreboard view specified requires numbering as part of the formatted output, I choose to hide the `Game` type as an implementation detail. The tradeoffs of this choice are worth discussing.
+- As the scoreboard view specified requires numbering as part of the formatted output, I choose to hide the `Game` type as an implementation detail. The tradeoffs of this choice are worth discussing.
 - Updates will not validate that a team's score is increasing, allowing for flexibility (e.g. a referee's ability to overturn goals before play restarts). Thus, out-of-order updates may result in an inaccurate scoreboard. 
 - The international sporting convention of listing the home team before the away team is used in the formatting of the response payload (e.g. `home 0 - away 3`).
