@@ -32,7 +32,11 @@ export class ScoreboardService {
     }
 
     public removeGame(options: {homeTeam: string, awayTeam: string}): void {
+        const index = this.games.findIndex((game) => {
+            return `${options.homeTeam} ${options.awayTeam}` === `${game.homeTeam} ${game.awayTeam}`;
+        });
 
+        this.games.splice(index, 1);
     }
 
     public getScoreboard(): string[] {

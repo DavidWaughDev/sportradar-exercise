@@ -79,11 +79,13 @@ describe('scoreboard service', () => {
     let scoreboardService = new ScoreboardService();
     scoreboardService.createGame({homeTeam: 'Mexico', awayTeam: 'Canada',});
     scoreboardService.createGame({homeTeam: 'Spain', awayTeam: 'Brazil',});
+    scoreboardService.createGame({homeTeam: 'Germany', awayTeam: 'France',});
     test('should remove a game', () => {
       scoreboardService.removeGame({homeTeam: 'Spain', awayTeam: 'Brazil',});
 
-      expect(scoreboardService.getScoreboard()).toBe([
-        '1. Mexico 0 - Canada 0', 
+      expect(scoreboardService.getScoreboard()).toEqual([
+        '1. Germany 0 - France 0',
+        '2. Mexico 0 - Canada 0', 
        ]);
     });
 
