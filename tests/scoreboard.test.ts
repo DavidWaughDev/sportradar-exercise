@@ -15,12 +15,12 @@ describe('scoreboard service', () => {
     });
 
     test('should fail if homeTeam or awayTeam are empty strings', () => {
-      expect(scoreboardService.createGame({homeTeam: '', awayTeam: 'Canada',}))
+      expect(() => scoreboardService.createGame({homeTeam: '', awayTeam: 'Canada',}))
         .toThrow('Team names cannot be empty');
     });
 
-    test('should fail if homeTeam or awayTeam are the same', () => {
-      expect(scoreboardService.createGame({homeTeam: 'Canada', awayTeam: 'Canada',}))
+    test('should fail if homeTeam and awayTeam are the same', () => {
+      expect(() => scoreboardService.createGame({homeTeam: 'Canada', awayTeam: 'Canada',}))
         .toThrow("Team names cannot be the same");
     });
   });
@@ -51,14 +51,14 @@ describe('scoreboard service', () => {
     });
 
     test('should fail when updating a non-existent game', () => {
-      expect(scoreboardService.updateGame({
+      expect(() => scoreboardService.updateGame({
         homeTeam: 'NonExistentTeam',
         homeTeamScore: 10,
         awayTeam: 'Brazil',
         awayTeamScore: 2,
       })).toThrow('The specified game does not exist');
 
-      expect(scoreboardService.updateGame({
+      expect(() => scoreboardService.updateGame({
         homeTeam: 'Spain',
         homeTeamScore: 10,
         awayTeam: 'NonExistentTeam',
@@ -66,7 +66,7 @@ describe('scoreboard service', () => {
       })).toThrow('The specified game does not exist');
 
       //note: home and away are inverted
-      expect(scoreboardService.updateGame({
+      expect(() => scoreboardService.updateGame({
         homeTeam: 'Brazil',
         homeTeamScore: 10,
         awayTeam: 'Spain',
@@ -90,13 +90,14 @@ describe('scoreboard service', () => {
     });
 
     test('should fail when removing a non-existent game', () => {
-      expect(scoreboardService.removeGame({homeTeam: 'NonExistentTeam', awayTeam: 'Brazil',}))
+      expect(() => scoreboardService.removeGame({homeTeam: 'NonExistentTeam', awayTeam: 'Brazil',}))
         .toThrow('The specified game does not exist');
 
-      expect(scoreboardService.removeGame({homeTeam: 'Spain', awayTeam: 'NonExistentTeam',}))
+      expect(() => scoreboardService.removeGame({homeTeam: 'Spain', awayTeam: 'NonExistentTeam',}))
         .toThrow('The specified game does not exist');
 
-      expect(scoreboardService.removeGame({homeTeam: 'Spain', awayTeam: 'Brazil',}))
+      //note: home and away are inverted
+      expect(() => scoreboardService.removeGame({homeTeam: 'Brazil', awayTeam: 'Spain',}))
         .toThrow('The specified game does not exist');
     }); 
   });

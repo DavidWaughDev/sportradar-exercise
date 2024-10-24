@@ -12,6 +12,9 @@ export class ScoreboardService {
     ) {}
 
     public createGame(options: {homeTeam: string, awayTeam: string}): void {
+        if (options.homeTeam === '' || options.awayTeam === '') throw new Error('Team names cannot be empty');
+        if (options.homeTeam === options.awayTeam) throw new Error('Team names cannot be the same');
+
         this.games = [...this.games, {
             homeTeam: options.homeTeam,
             homeTeamScore: 0,
@@ -27,6 +30,8 @@ export class ScoreboardService {
             return `${options.homeTeam} ${options.awayTeam}` === `${game.homeTeam} ${game.awayTeam}`;
         });
 
+        if (index == -1) throw new Error('The specified game does not exist');
+
         this.games[index].homeTeamScore = options.homeTeamScore;
         this.games[index].awayTeamScore = options.awayTeamScore;
     }
@@ -35,6 +40,8 @@ export class ScoreboardService {
         const index = this.games.findIndex((game) => {
             return `${options.homeTeam} ${options.awayTeam}` === `${game.homeTeam} ${game.awayTeam}`;
         });
+
+        if (index == -1) throw new Error('The specified game does not exist');
 
         this.games.splice(index, 1);
     }

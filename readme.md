@@ -20,15 +20,15 @@ with test results:
 ```
 scoreboard service
   createGame
-    ✓ should create a valid game (3 ms)
-    ✕ should fail if homeTeam or awayTeam are empty strings (2 ms)
-    ✕ should fail if homeTeam or awayTeam are the same (1 ms)
+    ✓ should create a valid game (4 ms)
+    ✓ should fail if homeTeam or awayTeam are empty strings (16 ms)
+    ✓ should fail if homeTeam and awayTeam are the same (1 ms)
   updateGame
     ✓ should update an existing game
-    ✕ should fail when updating a non-existent game
+    ✓ should fail when updating a non-existent game (2 ms)
   removeGame
-    ✕ should remove a game (5 ms)
-    ✕ should fail when removing a non-existent game
+    ✓ should remove a game
+    ✓ should fail when removing a non-existent game (3 ms)
   getScoreboard
     ✓ should get an empty scoreboard (1 ms)
     ✓ should get a scoreboard ordered first by total score, then by reversed creation order
@@ -37,6 +37,7 @@ scoreboard service
 ## Assumptions
 
 - As the scoreboard view specified requires numbering as part of the formatted output, I choose to hide the `Game` type as an implementation detail. The tradeoffs of this choice are worth discussing.
+- Without a second implementation, I don't see the need here to seperate the interface and implementation of ScoreboardService (also worth discussing).
 - While teams cannot play themselves, it is currently allowed for a team to be in multiple games simultaneously, just not against the same opponent.
 - Updates will not validate that a team's score is increasing, allowing for flexibility (e.g. a referee's ability to overturn goals before play restarts). Thus, out-of-order updates may result in an inaccurate scoreboard. 
 - The international sporting convention of listing the home team before the away team is used in the formatting of the response payload (e.g. `home 0 - away 3`).
