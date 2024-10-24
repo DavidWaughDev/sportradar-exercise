@@ -8,9 +8,9 @@ describe('scoreboard service', () => {
       scoreboardService.createGame({homeTeam: 'Mexico', awayTeam: 'Canada',});
       scoreboardService.createGame({homeTeam: 'Spain', awayTeam: 'Brazil',});
     
-      expect(scoreboardService.getScoreboard()).toBe([
-        '1. Mexico 0 - Canada 0',
-        '2. Spain 0 - Brazil 0', 
+      expect(scoreboardService.getScoreboard()).toEqual([
+        '1. Spain 0 - Brazil 0', 
+        '2. Mexico 0 - Canada 0',
        ]);
     });
 
@@ -44,7 +44,7 @@ describe('scoreboard service', () => {
         awayTeamScore: 5,
       });
 
-      expect(scoreboardService.getScoreboard()).toBe([
+      expect(scoreboardService.getScoreboard()).toEqual([
         '1. Spain 10 - Brazil 2',
         '2. Mexico 0 - Canada 5', 
        ]);
@@ -102,7 +102,7 @@ describe('scoreboard service', () => {
   describe('getScoreboard', () => {
     let scoreboardService = new ScoreboardService();
     test('should get an empty scoreboard', () => {
-      expect(scoreboardService.getScoreboard()).toBe('');
+      expect(scoreboardService.getScoreboard()).toEqual([]);
     });
 
     test('should get a scoreboard ordered first by total score, then by reversed creation order', () => {
@@ -142,7 +142,7 @@ describe('scoreboard service', () => {
         awayTeamScore: 1,
       });
 
-      expect(scoreboardService.getScoreboard()).toBe([
+      expect(scoreboardService.getScoreboard()).toEqual([
         '1. Uruguay 6 - Italy 6',
         '2. Spain 10 - Brazil 2',
         '3. Mexico 0 - Canada 5',
